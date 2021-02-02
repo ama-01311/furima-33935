@@ -17,6 +17,7 @@
 ### Association
 
 - has_many :items
+- has_many :orders
 
 ## itemsテーブル
 
@@ -41,15 +42,16 @@
 
 | Column                | Type       | Options           |
 | --------------------- | ---------- | ----------------- |
-| phone_number          | string     | null: false       |
+| user                  | references | foreign_key: true |
 | item                  | references | foreign_key: true |
 
 ### Association
 
 - belongs_to :item
-- belongs_to :address
+- belongs_to :user
+- has_one :address
 
-## addressテーブル
+## addressesテーブル
 
 | Column                   | Type        | Options           |
 | ------------------------ | ----------- | ----------------- |
@@ -58,6 +60,8 @@
 | delivery_municipality    | string      | null: false       |
 | delivery_address         | string      | null: false       |
 | delivery_building        | string      |                   |
+| phone_number             | string      | null: false       |
+| order                    | references  | foreign_key :true |
 
 ### Association
 - belongs_to :order
