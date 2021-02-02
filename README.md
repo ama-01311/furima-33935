@@ -11,7 +11,7 @@
 | fname_full_width           | string  | null: false               |
 | lname_kana                 | string  | null: false               |
 | fname_kana                 | string  | null: false               |
-| birth_data                 | data    | null: false               |
+| birth_date                 | date    | null: false               |
 
 
 ### Association
