@@ -1,24 +1,58 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column           | Type    | Options     |
+| ---------------- | ------- | ----------- |
+| nickname         | string  | null: false |
+| email            | string  | null: false |
+| password         | string  | null: false |
+| lname_full_width | string  | null: false |
+| fname_full_width | string  | null: false |
+| lname_kana       | string  | null: false |
+| fname_kana       | string  | null: false |
+| birth_year       | integer | null: false |
+| birth_month      | integer | null: false |
+| birth_day        | integer | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many :items
 
-* Configuration
+## itemsテーブル
 
-* Database creation
+| Column           | Type       | Options           |
+| ---------------- | ---------- | ----------------- |
+| item_name        | string     | null: false       |
+| item_description | text       | null: false       |
+| item_category    | string     | null: false       |
+| item_state       | string     | null: false       |
+| delivery_side    | string     | null: false       |
+| delivery_area    | string     | null: false       |
+| delivery_days    | integer    | null: false       |
+| selling_price    | integer    | null: false       |
+| user             | references | foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- has_one :order
+- belongs_to :user
 
-* Services (job queues, cache servers, search engines, etc.)
+## ordersテーブル
 
-* Deployment instructions
+| Column                | Type       | Options           |
+| --------------------- | ---------- | ----------------- |
+| credit_information    | integer    | null: false       |
+| credit_month          | integer    | null: false       |
+| credit_code           | integer    | null: false       |
+| delivery_post_number  | integer    | null: false       |
+| delivery_prefecture   | string     | null: false       |
+| delivery_municipality | string     | null: false       |
+| delivery_address      | string     | null: false       |
+| delivery_building     | string     |                   |
+| phone_number          | integer    | null: false       |
+| item                  | references | foreign_key: true |
 
-* ...
+### Association
+
+- belongs_to :item
