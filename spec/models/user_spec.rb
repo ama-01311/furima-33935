@@ -26,7 +26,7 @@ RSpec.describe User, type: :model do
       it 'emaiに＠がないと登録できない' do
         @user.email = 'testtest'
         @user.valid?
-        expect(@user.errors.full_messages).to include('Email @を入力してください')
+        expect(@user.errors.full_messages).to include('Email is invalid')
       end
       it 'passwordが空だと登録できない' do
         @user.password = nil
@@ -121,14 +121,13 @@ RSpec.describe User, type: :model do
     end
 
     context 'ユーザー新規登録できる場合' do
-      it 'passwordが６文字以上入力されていれば登録できる' do
-        @user.password = 'a123456'
-        @user.password_confirmation = 'a123456'
-        expect(@user).to be_valid
-      end
-      it 'passwordが半角英数字が混合されていれば登録できる' do
-        @user.password = 'a12345'
-        @user.password_confirmation = 'a12345'
+      it '
+      nicknameとemailと
+      passwordとpassword_confirmationと
+      lname_full_widthとfname_full_widthと
+      lname_kanaとfname_kanaと
+      birth_dateが揃っていれば登録できる
+      ' do
         expect(@user).to be_valid
       end
     end
