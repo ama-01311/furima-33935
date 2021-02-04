@@ -6,7 +6,7 @@ RSpec.describe User, type: :model do
   end
 
   describe 'ユーザー新規登録' do
-    context 'ユーザー新規登録できる場合' do
+    context 'ユーザー新規登録できない場合' do
       it 'nicknameが空だと登録できない' do
         @user.nickname = nil
         @user.valid?
@@ -84,7 +84,7 @@ RSpec.describe User, type: :model do
       end
     end
 
-    context 'ユーザー新規登録できない場合' do
+    context 'ユーザー新規登録できる場合' do
       it 'passwordが６文字以上入力されていれば登録できる' do
         @user.password = 'a123456'
         @user.password_confirmation = 'a123456'
