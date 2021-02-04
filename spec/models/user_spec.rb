@@ -39,6 +39,24 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
+      it 'passwordが半角英語のみでは登録できない' do
+        @user.password = 'aaaaaa'
+        @user.password_confirmation = 'aaaaaa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password 半角英数字を混合して入力してください")
+      end
+      it 'passwordが半角数字のみでは登録できない' do
+        @user.password = '111111'
+        @user.password_confirmation = '111111'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password 半角英数字を混合して入力してください")
+      end
+      it 'passwordが全角文字では登録できない' do
+        @user.password = 'ああああああ'
+        @user.password_confirmation = 'ああああああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password 半角英数字を混合して入力してください")
+      end
       it 'passwordとpassword(確認用)は値が一致していないと登録できない' do
         @user.password = 'a12345'
         @user.password_confirmation = 'a123456'
@@ -75,7 +93,25 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Fname kana can't be blank")
       end
-      it 'ユーザー本名のフリガナは、全角（カタカナ）でないと登録できない' do
+      it 'ユーザー本名の名字のフリガナは、半角文字だと登録できない' do
+        @user.lname_kana = 'aa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Lname kana 全角（カタカナ）を使用してください")
+      end
+      it 'ユーザー本名の名字のフリガナは、全角（カタカナ）でないと登録できない' do
+        @user.lname_kana = 'ああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Lname kana 全角（カタカナ）を使用してください")
+      end
+      it 'ユーザー本名の名前のフリガナは、半角文字だと登録できない' do
+        @user.fname_kana = 'aa'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Fname kana 全角（カタカナ）を使用してください")
+      end
+      it 'ユーザー本名の名前のフリガナは、全角（カタカナ）でないと登録できない' do
+        @user.fname_kana = 'ああ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Fname kana 全角（カタカナ）を使用してください")
       end
       it '生年月日が空だと登録できない' do
         @user.birth_date = nil
