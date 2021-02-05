@@ -1,16 +1,15 @@
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions 
-    belongs_to :item_category
-    belongs_to :item_state
-    belongs_to :delivery_side
-    belongs_to :delivery_prefecture
-    belongs_to :delivery_days
+  belongs_to :item_category
+  belongs_to :item_state
+  belongs_to :delivery_side
+  belongs_to :delivery_prefecture
+  belongs_to :delivery_days
   
-
   belongs_to :user
   has_one_attached :image
 
-  with_options numericality: {other_than: 1} do
+  with_options numericality: { other_than: 1 } do
     validates :item_category
     validates :item_state
     validates :delivery_side
@@ -28,8 +27,8 @@ class Item < ApplicationRecord
     validates :delivery_prefecture_id
     validates :delivery_days_id
     validates :image
-
-    validates :selling_price #format: { with: /\A(?=.*?[\d])[a-z\d]+\z/i, message: "半角数字で入力してください"}
+    validates :selling_price, format: { with: /\A[0-9]+\z/, message: "半角数字で入力してください"}, inclusion: {in: 300..9999999 }
+    
   end
-
+  
 end
