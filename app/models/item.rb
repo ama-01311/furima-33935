@@ -12,8 +12,7 @@ class Item < ApplicationRecord
     validates :delivery_days_id
     validates :image
 
-    validates :selling_price format: { with: /\A(?=.*?[\d])[a-z\d]+\z/i, message: "半角数字で入力してください"}
+    validates :selling_price #format: { with: /\A(?=.*?[\d])[a-z\d]+\z/i, message: "半角数字で入力してください"}
   end
-  validates :user_id foreign_key: true
 
 end
