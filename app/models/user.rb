@@ -18,6 +18,7 @@ class User < ApplicationRecord
   end
 
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: '半角英数字を混合して入力してください' }
+
+  has_many :items
 end
 
-has_many :items
