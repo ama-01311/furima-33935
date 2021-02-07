@@ -10,11 +10,11 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   with_options numericality: { other_than: 1 } do
-    validates :item_category
-    validates :item_state
-    validates :delivery_side
-    validates :delivery_prefecture
-    validates :delivery_days
+    validates :item_category_id
+    validates :item_state_id
+    validates :delivery_side_id
+    validates :delivery_prefecture_id
+    validates :delivery_days_id
   end
   
 
@@ -27,8 +27,7 @@ class Item < ApplicationRecord
     validates :delivery_prefecture_id
     validates :delivery_days_id
     validates :image
-    validates :selling_price, format: { with: /\A[0-9]+\z/, message: "半角数字で入力してください"}, inclusion: {in: 300..9999999 }
-    
+    validates :selling_price, format: { with: /\A[0-9]+\z/, message: "半角数字で入力してください"}, numericality: {greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999 }
   end
   
 end
