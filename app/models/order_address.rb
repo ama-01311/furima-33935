@@ -13,6 +13,8 @@ class OrderAddress
     validates :user_id
     validates :item_id
 
+    validates :token
+
   end
   validates :delivery_prefecture_id, numericality: {other_than: 1 }
 
