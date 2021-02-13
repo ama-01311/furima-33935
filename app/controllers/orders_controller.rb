@@ -1,14 +1,13 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
+  before_action :set_item, only: [:index, :create]
   before_action :return_index, only: [:index, :create]
+  
   def index
-    set_item
-    @orders = Order.new
     @order_address = OrderAddress.new
   end
 
   def create
-    set_item
     @order_address = OrderAddress.new(order_params)
     if @order_address.valid?
       pay_item

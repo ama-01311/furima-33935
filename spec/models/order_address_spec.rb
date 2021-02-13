@@ -14,6 +14,10 @@ RSpec.describe OrderAddress, type: :model do
           delivery_addressとdelivery_buildingとphone_numberとtokenがある時' do
         expect(@order_address).to be_valid
       end
+      it 'delivery_buildingが空でも登録できる' do
+        @order_address.delivery_building = nil
+      expect(@order_address).to be_valid
+      end
     end
 
     context '商品購入できない場合' do
@@ -57,10 +61,25 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number is not a number')
       end
+      it 'phone_number が12桁以上の場合' do
+        @order_address.phone_number = '090123456789'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
+      end
       it 'tokenが空の場合' do
         @order_address.token = nil
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include("Token can't be blank")
+      end
+      it 'user_idが空の場合' do
+        @order_address.user_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("User can't be blank")
+      end
+      it 'item_idが空の場合' do
+        @order_address.item_id = nil
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include("Item can't be blank")
       end
     end
   end
