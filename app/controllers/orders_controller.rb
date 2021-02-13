@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
   before_action :return_index, only: [:index, :create]
-  
+
   def index
     @order_address = OrderAddress.new
   end
@@ -30,7 +30,6 @@ class OrdersController < ApplicationController
   end
 
   def return_index
-    set_item
     redirect_to root_path unless current_user.id != @item.user_id && @item.order.nil?
   end
 

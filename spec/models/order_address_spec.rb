@@ -32,7 +32,7 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Delivery post number is invalid. Include hyphen(-)')
       end
       it 'delivery_prefecture_idが１の場合' do
-        @order_address.delivery_prefecture_id = '1'
+        @order_address.delivery_prefecture_id = 1
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Delivery prefecture must be other than 1')
       end
